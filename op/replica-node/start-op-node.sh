@@ -1,3 +1,4 @@
+# Run the op-node in the background with the specified configuration
 nohup ../build/op-node \
  --l2=http://127.0.0.1:8531 --l2.jwt-secret=./jwt.txt  \
  --verifier.l1-confs=5 \
