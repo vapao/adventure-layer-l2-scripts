@@ -8,93 +8,60 @@ This repository contains core scripts for AdventureGold DAO's Layer 2 solution, 
 interaction scripts, and testing utilities. Designed to facilitate cross-chain asset bridging, Layer 2 transaction
 processing, and smart contract management.
 
-### Directory Structure
-
-```
-.
-├── contracts/ # Smart contract source code
-│ ├── Bridge.sol # Cross-chain bridging main contract
-│ └── L2Token.sol # Layer 2 token contract
-├── scripts/ # Deployment & interaction scripts
-│ ├── deploy/ # Deployment scripts
-│ │ ├── deploy_bridge.js
-│ │ └── deploy_token.js
-│ └── tasks/ # Hardhat custom tasks
-├── test/ # Test cases
-│ ├── bridge.test.js # Cross-chain bridge tests
-│ └── token.test.js # Token contract tests
-├── hardhat.config.js # Hardhat configuration
-├── .env.example # Environment template
-└── package.json # Dependency configuration
-
-```
-
 ## Development Setup
 
-### Prerequisites
-
-- Node.js v16.x+
-- npm v8.x+
-- Git
-
-### Install Dependencies
-
+### init
 ```bash
-git clone https://github.com/AdventureGoldDao/adventure-layer-l2-scripts.git
-cd adventure-layer-l2-scripts
-npm install
+./init_env.sh 
+cp .envrc.example .envrc
+```
+Fund the addresses
+You will need to send ETH to the Admin, Proposer, and Batcher addresses. The exact amount of ETH required depends on the L1 network being used. You do not need to send any ETH to the Sequencer address as it does not send transactions.
+
+It's recommended to fund the addresses with the following amounts when using Sepolia:
+
+Admin — 1 Sepolia ETH
+Proposer — 1 Sepolia ETH
+Batcher — 1 Sepolia ETH
+
+### update config run
+```bash
+sudo apt install direnv
+echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
+source ~/.bashrc
+
+vim .envrc
+direnv allow
 ```
 
-### Environment Configuration
-
-1. Copy environment template:
-   ```bash
-   cp .env.example .env
-   ```
-2. Configure variables (Obtain API keys from service providers):
-   ```ini
-   ALCHEMY_API_KEY="your_alchemy_key"
-   INFURA_API_KEY="your_infura_key"
-   MNEMONIC="your_wallet_mnemonic"
-   ETHERSCAN_API_KEY="your_etherscan_key"
-   ```
-
-### Start Local Chain
-
+### sequencer
 ```bash
-npx hardhat node
+cd ./sequencer-node
+#init
+./init.sh
+#run
+./run-all.sh
+#stop
+./stop.sh
 ```
 
-### Run Tests
-
+### replica
 ```bash
-npx hardhat test
-```
+vim .envrc 
+# set P2P_STATIC
+direnv allow
 
-## Production Deployment
+cd ./replica-node
 
-### Preparation
+vim config.tmol 
+# set Node.P2P.StaticNodes
 
-1. Verify all tests pass:
-   ```bash
-   npx hardhat test
-   ```
-2. Compile contracts:
-   ```bash
-   npx hardhat compile
-   ```
-
-### Mainnet Deployment
-
-```bash
-npx hardhat run scripts/deploy/deploy_bridge.js --network mainnet
-npx hardhat run scripts/deploy/deploy_token.js --network mainnet
-```
-
-### Contract Verification
-
-```bash
-npx hardhat verify --network mainnet <CONTRACT_ADDRESS> <CONSTRUCTOR_ARGUMENTS>
+#init
+./init.sh
+#run
+./run-all.sh
+#stop
+./stop.sh
 ```
 
 ## Additional Information
