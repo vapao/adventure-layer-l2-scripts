@@ -1,3 +1,4 @@
+# Run all scripts for the sequencer node
 
 echo "== Running all scripts"
 ./start-op-geth.sh

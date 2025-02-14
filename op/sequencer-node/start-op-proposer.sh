@@ -1,3 +1,6 @@
+
+# Run the op-proposer in the background with the specified configuration
+
 echo "== Running op-proposer script"
 nohup ../build/op-proposer \
 --poll-interval=12s --rpc.port=8520 --rollup-rpc=http://localhost:8517 \

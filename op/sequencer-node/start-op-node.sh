@@ -1,3 +1,5 @@
+# Run the op-node in the background with the specified configuration
+
 echo "== Running op-node script"
 nohup ../build/op-node \
 --l2=http://localhost:8521 \

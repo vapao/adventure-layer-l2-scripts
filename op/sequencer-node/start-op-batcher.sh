@@ -1,3 +1,4 @@
+# Run the op-batcher in the background with the specified configuration
 echo "== Running op-batcher script"
 nohup  ../build/op-batcher \
 --l2-eth-rpc=http://localhost:8515 \  # L2 Ethereum RPC endpoint
